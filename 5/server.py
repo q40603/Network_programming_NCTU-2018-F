@@ -7,11 +7,11 @@ import stomp
 
 
 class DBControl(object):
-    def __init__(self):
+    def __init__(self, mq_ip='127.0.0.1', mq_port=61613):
         try:
-            self.mq = stomp.Connection()
+            self.mq = stomp.Connection([(mq_ip, 61613)])
             self.mq.start()
-            self.mq.connect('admin', 'password', wait=True)
+            self.mq.connect(wait=True)
         except Exception as e:
             print(e, file=sys.stderr)
 
