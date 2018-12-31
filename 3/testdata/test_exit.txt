@@ -1,0 +1,4 @@
+register test_exit test_exit
+login test_exit test_exit
+receive-post test_exit
+exit

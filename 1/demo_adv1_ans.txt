@@ -1,0 +1,12 @@
+0 1 start playing #1
+1 2 start playing #2
+3 1 finish playing NO #1
+4 2 finish playing YES #2
+4 3 start playing #1
+5 1 start playing #2
+7 3 finish playing NO #1
+8 1 finish playing YES #2
+9 3 start playing #2
+12 3 finish playing NO #2
+14 3 start playing #1
+15 3 finish playing YES #1

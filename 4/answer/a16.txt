@@ -1,0 +1,27 @@
+Not login yet
+Success!
+Usage: send-group <user> <group> <message>
+Success!
+<<<DeMo_user1->GROUP<1>: hello 1>>>
+You are not the member of 4
+No such group exist
+Success!
+Success!
+<<<DeMo_user2->GROUP<3>: hello 3, i am user2>>>
+Success!
+Success!
+<<<DeMo_user3->GROUP<4>: hello 4, i am user3>>>
+Success!
+Success!
+<<<DeMo_user4->GROUP<5>: hello 5, i am user4>>>
+Success!
+Success!
+<<<DeMo_user5->GROUP<6>: hello 6, i am user5>>>
+Success!
+Success!
+<<<DeMo_user6->GROUP<7>: hello 7, i am user6>>>
+Success!
+Success!
+<<<DeMo_user7->GROUP<7>: hello 7, i am user7>>>
+<<<DeMo_user7->GROUP<7>: hello 7, i am user7>>>
+Usage: send-group <user> <group> <message>

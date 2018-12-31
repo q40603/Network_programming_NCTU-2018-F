@@ -1,0 +1,43 @@
+Not login yet
+Not login yet
+Success!
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+1
+2
+Success!
+2
+3
+Success!
+3
+4
+Success!
+4
+5
+Success!
+5
+6
+Success!
+6
+7
+Success!
+7
+8
+Success!
+8
+9
+Success!
+9
+10
+Success!
+10
+1
+Usage: list-joined <user>

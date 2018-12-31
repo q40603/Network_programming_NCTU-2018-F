@@ -1,0 +1,46 @@
+Not login yet
+Not login yet
+Not login yet
+Not login yet
+Success!
+Usage: send <user> <friend> <message>
+Usage: send <user> <friend> <message>
+No such user exist
+Usage: send <user> <friend> <message>
+DeMo_user4 is not your friend
+Success!
+Success!
+Usage: send <user> <friend> <message>
+Success!
+Usage: send <user> <friend> <message>
+<<<DeMo_user2->DeMo_user1: haha>>>
+Success!
+Success!
+Success!
+Success!
+Success!
+Success!
+Success!
+Success!
+Success!
+<<<DeMo_user1->DeMo_user10: 1 10>>>
+Success!
+<<<DeMo_user2->DeMo_user1: 2 1>>>
+Success!
+<<<DeMo_user3->DeMo_user2: 3 2>>>
+Success!
+<<<DeMo_user8->DeMo_user7: 8 7>>>
+Success!
+<<<DeMo_user9->DeMo_user8: 9 8>>>
+Success!
+<<<DeMo_user10->DeMo_user9: 10 9>>>
+Bye!
+Bye!
+Bye!
+Bye!
+Bye!
+Bye!
+Bye!
+Bye!
+Bye!
+Bye!

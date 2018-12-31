@@ -1,0 +1,25 @@
+list-group DeMo_user1
+list-joined DeMo_user1
+login DeMo_user1 DeMo_pwd1
+list-group DeMo_user1
+list-joined DeMo_user1
+login DeMo_user2 DeMo_pwd2
+list-joined DeMo_user2
+login DeMo_user3 DeMo_pwd3
+list-joined DeMo_user3
+login DeMo_user4 DeMo_pwd4
+list-joined DeMo_user4
+login DeMo_user5 DeMo_pwd5
+list-joined DeMo_user5
+login DeMo_user6 DeMo_pwd6
+list-joined DeMo_user6
+login DeMo_user7 DeMo_pwd7
+list-joined DeMo_user7
+login DeMo_user8 DeMo_pwd8
+list-joined DeMo_user8
+login DeMo_user9 DeMo_pwd9
+list-joined DeMo_user9
+login DeMo_user10 DeMo_pwd10
+list-joined DeMo_user10
+list-joined DeMo_user10 all
+exit

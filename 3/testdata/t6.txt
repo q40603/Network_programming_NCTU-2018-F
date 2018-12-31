@@ -1,0 +1,15 @@
+register t6_userA_test
+login t6_userA_test
+register t6_userA_test aaa
+login t6_userA_test aaa
+delete t6_userA_test t6_userB_test
+invite t6_userA_test t6_userB_test t6_userC_test
+list-invite t6_userA_test aaaaaa
+accept-invite t6_userA_test t6_userB_test t6_userB_test t6_userC_test
+list-friend t6_userA_test t6_userA_test
+post t6_userA_test
+receive-post t6_userA_test t6_userB_test
+logout t6_userA_test aaaaa
+del t6_userA_test
+delete t6_userA_test
+exit

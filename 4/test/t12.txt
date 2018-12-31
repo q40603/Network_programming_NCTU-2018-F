@@ -1,0 +1,40 @@
+send
+send DeMo_user1 DeMo_user2
+send DeMo_user1 DeMo_user2 haha
+send DeMo_user1
+login DeMo_user1 DeMo_pwd1
+send DeMo_user1
+send DeMo_user1 a
+send DeMo_user1 a hello
+send DeMo_user1 DeMo_user2
+send DeMo_user1 DeMo_user4 haha
+send DeMo_user1 DeMo_user2 haha
+login DeMo_user2 DeMo_pwd2
+send DeMo_user1 DeMo_user2
+send DeMo_user2 DeMo_user1 haha
+send DeMo_user2
+login DeMo_user3 DeMo_pwd3
+login DeMo_user4 DeMo_pwd4
+login DeMo_user5 DeMo_pwd5
+login DeMo_user6 DeMo_pwd6
+login DeMo_user7 DeMo_pwd7
+login DeMo_user8 DeMo_pwd8
+login DeMo_user9 DeMo_pwd9
+login DeMo_user10 DeMo_pwd10
+send DeMo_user1 DeMo_user10 1 10
+send DeMo_user2 DeMo_user1 2 1
+send DeMo_user3 DeMo_user2 3 2
+send DeMo_user8 DeMo_user7 8 7
+send DeMo_user9 DeMo_user8 9 8
+send DeMo_user10 DeMo_user9 10 9
+logout DeMo_user1
+logout DeMo_user2
+logout DeMo_user3
+logout DeMo_user4
+logout DeMo_user5
+logout DeMo_user6
+logout DeMo_user7
+logout DeMo_user8
+logout DeMo_user9
+logout DeMo_user10
+exit

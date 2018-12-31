@@ -1,0 +1,20 @@
+send-group DeMo_user1 1 hello 1
+login DeMo_user1 DeMo_pwd1
+send-group DeMo_user1 1
+send-group DeMo_user1 1 hello 1
+send-group DeMo_user1 4 hello 4
+send-group DeMo_user1 100 hello 100
+login DeMo_user2 DeMo_pwd2
+send-group DeMo_user2 3 hello 3, i am user2
+login DeMo_user3 DeMo_pwd3
+send-group DeMo_user3 4 hello 4, i am user3
+login DeMo_user4 DeMo_pwd4
+send-group DeMo_user4 5 hello 5, i am user4
+login DeMo_user5 DeMo_pwd5
+send-group DeMo_user5 6 hello 6, i am user5
+login DeMo_user6 DeMo_pwd6
+send-group DeMo_user6 7 hello 7, i am user6
+login DeMo_user7 DeMo_pwd7
+send-group DeMo_user7 7 hello 7, i am user7
+send-group DeMo_user6
+exit

@@ -1,0 +1,33 @@
+asdf
+register t5_userA_test 123
+register t5_userB_test 456
+login t5_userA_test 456
+register t5_userC_test 741
+delete t5_userA_test
+login t5_userA_test 123
+login t5_userB_test 456
+delete t5_userA_test
+delete t5_userA_test
+login t5_userC_test 741
+logout t5_userB_test
+logout t5_userB_test
+invite t5_userB_test t5_userC_test
+invite t5_userC_test t5_userA_test
+register t5_userA_test 123
+invite t5_userC_test t5_userA_test
+login t5_userA_test 123
+login t5_userB_test 456
+accept-invite t5_userA_test t5_userC_test
+accept-invite t5_userB_test t5_userC_test
+invite t5_userC_test t5_userC_test
+list-invite t5_userC_test
+list-friend t5_userC_test
+invite t5_userA_test t5_userB_test
+list-invite t5_userB_test
+accept-invite t5_userA_test t5_userB_test
+post t5_userC_test hi everyone
+receive-post t5_userB_test
+delete t5_userA_test
+delete t5_userB_test
+delete t5_userC_test
+exit

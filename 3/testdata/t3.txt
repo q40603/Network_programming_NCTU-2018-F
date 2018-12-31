@@ -1,0 +1,35 @@
+register t3_userA_test 111
+register t3_userB_test 222
+register t3_userC_test 333
+login t3_userA_test 123
+login t3_userA_test 111
+login t3_userD_test 444
+delete t3_userB_test
+login t3_userB_test 222
+login t3_userC_test 333
+invite t3_userA_test t3_userB_test
+invite t3_userA_test t3_userA_test
+invite t3_userA_test t3_userB_test
+invite t3_userB_test t3_userA_test
+invite t3_userA_test t3_userD_test
+accept-invite t3_userA_test t3_userB_test
+accept-invite t3_userB_test t3_userA_test
+invite t3_userA_test t3_userB_test
+invite t3_userA_test t3_userD_test
+invite t3_userB_test t3_userC_test
+register t3_userA_test 123
+accept-invite t3_userC_test t3_userB_test
+list-friend t3_userA_test
+list-friend t3_userB_test
+list-friend t3_userC_test
+post t3_userA_test Hi I am A
+post t3_userB_test Hi I am B
+post t3_userC_test Hi I am C
+receive-post t3_userA_test
+receive-post t3_userB_test
+receive-post t3_userC_test
+logout t3_userD_test
+delete t3_userA_test
+delete t3_userB_test
+delete t3_userC_test
+exit

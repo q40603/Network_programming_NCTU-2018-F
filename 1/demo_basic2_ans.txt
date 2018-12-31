@@ -1,0 +1,24 @@
+0 1 start playing
+3 2 wait in line
+5 1 finish playing NO
+5 2 start playing
+6 3 wait in line
+7 1 wait in line
+9 4 wait in line
+10 2 finish playing YES
+10 3 start playing
+15 3 finish playing NO
+15 1 start playing
+17 3 wait in line
+20 1 finish playing YES
+20 4 start playing
+25 4 finish playing NO
+25 3 start playing
+27 4 wait in line
+30 3 finish playing YES
+30 4 start playing
+35 4 finish playing NO
+37 4 start playing
+42 4 finish playing NO
+44 4 start playing
+49 4 finish playing YES

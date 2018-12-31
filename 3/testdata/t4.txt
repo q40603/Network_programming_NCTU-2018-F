@@ -1,0 +1,37 @@
+register t4_userA_test aaaaa
+register t4_userA_test bbbbb
+login t4_userA_test aaa
+register t4_userB_test aaaaa
+register t4_userC_test aaaaa
+login t4_userA_test aaaaa
+login t4_userC_test aaaaa
+invite t4_userB_test t4_userA_test
+invite t4_userA_test t4_userA_test
+invite t4_userA_test t4_userD_test
+invite t4_userA_test t4_userB_test
+invite t4_userA_test t4_userB_test
+invite t4_userC_test t4_userB_test
+logout t4_userA_test
+list-invite t4_userB_test
+login t4_userB_test aaaaa
+list-invite t4_userB_test
+accept-invite t4_userB_test t4_userA_test
+accept-invite t4_userC_test t4_userB_test
+invite t4_userB_test t4_userA_test
+invite t4_userB_test t4_userC_test
+list-invite t4_userB_test
+list-friend t4_userB_test
+post t4_userB_test wwwww
+login t4_userA_test aaaaa
+receive-post t4_userA_test
+accept-invite t4_userB_test t4_userC_test
+post t4_userC_test bello
+post t4_userA_test wow
+post t4_userA_test hahaha
+receive-post t4_userB_test
+delete t4_userC_test
+receive-post t4_userB_test
+delete t4_userB_test
+list-friend t4_userA_test
+delete t4_userA_test
+exit

@@ -1,0 +1,29 @@
+create-group DeMo_user1 1
+create-group DeMo_user1 2
+create-group DeMo_user1 1
+create-group DeMo_user1
+login DeMo_user1 DeMo_pwd1
+login DeMo_user2 DeMo_pwd2
+login DeMo_user3 DeMo_pwd3
+login DeMo_user4 DeMo_pwd4
+login DeMo_user5 DeMo_pwd5
+login DeMo_user6 DeMo_pwd6
+login DeMo_user7 DeMo_pwd7
+login DeMo_user8 DeMo_pwd8
+login DeMo_user9 DeMo_pwd9
+login DeMo_user10 DeMo_pwd10
+create-group DeMo_user1 1
+create-group DeMo_user2 2
+create-group DeMo_user2 1
+create-group DeMo_user3 3
+create-group a a
+create-group DeMo_user4 4
+create-group DeMo_user5 5
+create-group DeMo_user6 6
+create-group DeMo_user7 7
+create-group DeMo_user8 8
+create-group DeMo_user9 9
+create-group DeMo_user10 10
+create-group DeMo_user1 1 1
+create-group DeMo_user1
+exit

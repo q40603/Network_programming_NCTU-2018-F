@@ -1,0 +1,61 @@
+register multi1 1
+register multi2 2
+register multi3 3
+register multi4 4
+register multi5 5
+register multi6 6
+register multi7 7
+register multi8 8
+register multi9 9
+register multi10 10
+login multi1 1
+login multi2 2
+login multi3 3
+login multi4 4
+login multi5 5
+login multi6 6
+login multi7 7
+login multi8 8
+login multi9 9
+login multi10 10
+invite multi1 multi2
+invite multi2 multi3
+invite multi3 multi4
+invite multi4 multi5
+invite multi5 multi6
+invite multi6 multi7
+invite multi7 multi8
+invite multi8 multi9
+invite multi9 multi10
+invite multi10 multi1
+accept-invite multi10 multi9
+accept-invite multi9 multi8
+accept-invite multi8 multi7
+accept-invite multi7 multi6
+accept-invite multi6 multi5
+accept-invite multi5 multi4
+accept-invite multi4 multi3
+accept-invite multi3 multi2
+accept-invite multi2 multi1
+accept-invite multi1 multi10
+list-friend multi1
+list-friend multi2
+list-friend multi3
+list-friend multi4
+list-friend multi5
+list-friend multi6
+list-friend multi7
+list-friend multi8
+list-friend multi9
+list-friend multi10
+delete multi1
+delete multi2
+delete multi3
+delete multi4
+delete multi5
+delete multi6
+delete multi7
+delete multi8
+delete multi9
+delete multi10
+exit

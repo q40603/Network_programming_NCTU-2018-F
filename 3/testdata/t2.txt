@@ -1,0 +1,22 @@
+register t2_user1_test
+register t2_user1_test zzz zzz
+register
+login t2_user1_test 111
+login t2_user2_test 222
+delete t2_user3_test
+login t2_user3_test 333
+accept-invite t2_user1_test t2_user2_test
+invite t2_user1_test t2_user2_test
+invite t2_user1_test t2_user1_test
+invite t2_user1_test t2_user4_test
+register t2_user4_test 444
+login t2_user4_test 444
+invite t2_user1_test t2_user4_test
+list-invite t2_user4_test
+accept-invite t2_user4_test t2_user1_test
+list-friend t2_user1_test
+delete t2_user1_test
+delete t2_user2_test
+delete t2_user3_test
+delete t2_user4_test
+exit
