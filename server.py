@@ -8,7 +8,7 @@ import stomp
 
 connect_to_mq = stomp.Connection([('18.224.6.54', 61613)])
 connect_to_mq.start()
-connect_to_mq.connect('admin', 'password', wait=True)
+connect_to_mq.connect('admin', 'admin', wait=True)
 class DBControl(object):
     def __auth(func):
         def validate_token(self, token=None, *args):
