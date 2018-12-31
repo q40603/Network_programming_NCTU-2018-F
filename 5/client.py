@@ -29,7 +29,7 @@ class Client(object):
             print(e, file=sys.stderr)
             sys.exit(1)
         try:
-            self.mq = stomp.Connection([('18.224.6.54', 61616)])
+            self.mq = stomp.Connection([('18.224.6.54', 61613)])
             self.mq.set_listener('mq', MQListener())
             self.mq.start()
             self.mq.connect(wait=True)
