@@ -7,7 +7,7 @@ import stomp
 
 
 class DBControl(object):
-    def __init__(self, mq_ip='0.0.0.0', mq_port=61616):
+    def __init__(self, mq_ip='127.0.0.1', mq_port=61616):
         try:
             self.mq = stomp.Connection([(mq_ip, 61616)])
             self.mq.start()
