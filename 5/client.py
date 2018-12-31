@@ -3,17 +3,11 @@ import socket
 import json
 import os
 import stomp
-
-
-class MQListener(stomp.ConnectionListener):
-    def on_message(self, headers, msg):
-        content = json.loads(msg)
-        if content['type'] == 0:
-            print('<<<{}->{}: {}>>>'.format(content['from'], content['to'], content['message']))
-        else:
-            print('<<<{}->GROUP<{}>: {}>>>'.format(content['from'], content['to'], content['message']))
-
-
+class MyListener(stomp.ConnectionListener):
+    def on_error(self, headers, message):
+        print('received an error "%s"' % message)
+    def on_message(self, headers, message):
+        print(message)
 class Client(object):
     def __init__(self, ip, port):
         try:
@@ -24,17 +18,13 @@ class Client(object):
             else:
                 raise Exception('Port value should between 1~65535')
             self.cookie = {}
-            self.group = {}
+            self.conn = stomp.Connection([('18.224.6.54', 61613)])
+            self.conn.set_listener('', MyListener())
+            self.conn.start()
+            self.conn.connect('admin', 'admin', wait=True)            
         except Exception as e:
             print(e, file=sys.stderr)
             sys.exit(1)
-        try:
-            self.mq = stomp.Connection([('18.224.6.54', 61613)])
-            self.mq.set_listener('mq', MQListener())
-            self.mq.start()
-            self.mq.connect(wait=True)
-        except Exception as e:
-            print(e, file=sys.stderr)
 
     def run(self):
         while True:
@@ -45,14 +35,14 @@ class Client(object):
                 try:
                     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                         s.connect((self.ip, self.port))
-                        req = self.__attach_token(cmd)
-                        s.send(req.encode())
+                        cmd = self.__attach_token(cmd)
+                        s.send(cmd.encode())
                         resp = s.recv(4096).decode()
-                        self.handle_result(json.loads(resp), cmd)
+                        self.__show_result(json.loads(resp), cmd)
                 except Exception as e:
                     print(e, file=sys.stderr)
 
-    def handle_result(self, resp, cmd=None):
+    def __show_result(self, resp, cmd=None):
         if 'message' in resp:
             print(resp['message'])
 
@@ -75,36 +65,31 @@ class Client(object):
                 for p in resp['post']:
                     print('{}: {}'.format(p['id'], p['message']))
             else:
-                print('No posts')
-
+                print('No posts') 
         if 'group' in resp:
             if len(resp['group']) > 0:
                 for g in resp['group']:
                     print(g)
             else:
                 print('No groups')
-
         if cmd:
             command = cmd.split()
-            if resp['status'] == 0:
-                if command[0] == 'login':
+            if resp['status'] == 0 and command[0] == 'login':
+                if command[1] in self.cookie:
+                    if resp['token'] != self.cookie[command[1]] :
+                        self.cookie[command[1]] = resp['token']
+                        self.__subscribe_channel(command[1], resp['token'], resp['subscribe'])
+                else:
                     self.cookie[command[1]] = resp['token']
-                    self.group[command[1]] = []
-                    for g in resp['channel']:
-                        if g['type'] == 0:
-                            self.mq.subscribe('/queue/' + g['channel'], command[1])
-                        else:
-                            self.mq.subscribe('/topic/' + g['channel'], g['name'] + command[1])
-                            self.group[command[1]].append(g['name'] + command[1])
-                elif command[0] == 'create-group' or command[0] == 'join-group':
-                    self.mq.subscribe('/topic/' + g['channel'], command[2] + command[1])
-                    self.group[command[1]].append(command[2] + command[1])
-                elif command[0] == 'logout' or command[0] == 'delete':
-                    self.mq.unsubscribe(command[1])
-                    for g in self.group[command[1]]:
-                        self.mq.unsubscribe(g)
-                    del self.group[command[1]]
-
+                    self.__subscribe_channel(command[1], resp['token'], resp['subscribe'])
+            elif resp['status'] == 0 and command[0] == 'logout':
+                self.__unsubscribe_channel(resp['user'], command[1], resp['unsubscribe'])
+            elif resp['status'] == 0 and command[0] == 'create-group':
+                self.__subscribe_group_during_login(command)
+            elif resp['status'] == 0 and command[0] == 'join-group':
+                self.__subscribe_group_during_login(command)
+            elif resp['status'] == 0 and command[0] == 'delete':
+                self.__unsubscribe_channel(resp['user'], command[1], resp['unsubscribe'])
     def __attach_token(self, cmd=None):
         if cmd:
             command = cmd.split()
@@ -117,6 +102,18 @@ class Client(object):
             return ' '.join(command)
         else:
             return cmd
+    def __subscribe_channel(self, user, token, subscribe_to):
+        self.conn.subscribe(destination='/topic/friend/' + str(user), id = token)
+        for i in subscribe_to:
+            self.conn.subscribe(destination='/topic/group/' + str(i), id = str(token)+str(i))
+    def __unsubscribe_channel(self, user, token, unsubscribe_to):
+        self.conn.unsubscribe(destination='/topic/friend/' + str(user), id = token)
+        for i in unsubscribe_to:
+            self.conn.unsubscribe(destination='/topic/group/' + str(i), id = str(token)+str(i))
+    def __subscribe_group_during_login(self, cmd):
+        self.conn.subscribe(destination='/topic/group/' + str(cmd[2]), id = str(cmd[1])+str(cmd[2]))
+
+    
 
 
 def launch_client(ip, port):
