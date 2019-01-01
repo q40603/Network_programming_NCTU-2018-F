@@ -7,7 +7,7 @@ A tool for retrieving basic information from the running EC2 instances.
 """
 
 # Connect to EC2
-ec2 = boto3.resource('ec2')
+ec2 = boto3.resource('ec2',region_name='us-east-2')
 
 # Get information for all running instances
 running_instances = ec2.instances.filter(Filters=[{
