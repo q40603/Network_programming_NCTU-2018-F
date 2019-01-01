@@ -49,4 +49,4 @@ class App_server(BaseModel):
 
 if __name__ == '__main__':
     db.connect()
-    db.create_tables([User, Invitation, Friend, Post, Follow, Token, Chat_group])
+    db.create_tables([User, Invitation, Friend, Post, Follow, Token, Chat_group, App_server])
