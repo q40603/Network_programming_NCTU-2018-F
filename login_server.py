@@ -14,20 +14,19 @@ user_data = '''#!/bin/bash
 python3 /home/ubuntu/5/model.py
 python3 /home/ubuntu/5/server.py 0.0.0.0 8080
 '''
-class DBControl(object):
-    def createInstance():
-        instance = ec2.create_instances(
-            ImageId="ami-0d914ccd1a3279ef5", 
-            InstanceType = "t2.micro",  
-            SecurityGroupIds=['launch-wizard-1'],
-            MinCount=1,
-            MaxCount=1,
-            KeyName='qq_key',
-            UserData=user_data
+def createInstance():
+    instance = ec2.create_instances(
+        ImageId="ami-0d914ccd1a3279ef5", 
+        InstanceType = "t2.micro",  
+        SecurityGroupIds=['launch-wizard-1'],
+        MinCount=1,
+        MaxCount=1,
+        KeyName='qq_key',
+        UserData=user_data
 
-         )
-         # return response
-        return instance[0].instance_id
+    )
+    return instance[0].instance_id
+class DBControl(object):
     def __auth(func):
         def validate_token(self, token=None, *args):
             if token:
