@@ -37,9 +37,11 @@ class Client(object):
                 try:
                     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                         task = cmd.split()
-                        #if(task[0] == "login" or task[0] == "logout" or task[0] == "register" or task[0] == "delete"):
+                        if((task[0] == "login" or task[0] == "logout" or task[0] == "register" or task[0] == "delete" ) or (task[1] not in self.cookie) or (self.cookie[task[1]] == "")):
+                            s.connect((self.ip, self.port))
+                        else :
+                            s.connect((self.server[task[1]], 8080))
                         #self.__assign_server()
-                        s.connect((self.ip, self.port))
                         cmd = self.__attach_token(cmd)
                         s.send(cmd.encode())
                         resp = s.recv(4096).decode()
@@ -93,7 +95,14 @@ class Client(object):
                 else:
                     self.cookie[command[1]] = resp['token']
                     self.__subscribe_channel(command[1], resp['token'], resp['subscribe'])
+                if command[1] in self.server:
+                    if resp['app_server'] != self.server[command[1]]:
+                        self.server[command[1]] = resp['app_server']
+                else:
+                    self.server[command[1]] = resp['app_server']
             elif resp['status'] == 0 and command[0] == 'logout':
+                self.cookie[command[1]] = ""
+                self.server[command[1]] = ""
                 self.__unsubscribe_channel(resp['user'], command[1], resp['unsubscribe'])
             elif resp['status'] == 0 and command[0] == 'create-group':
                 self.__subscribe_group_during_login(command)
