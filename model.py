@@ -41,6 +41,10 @@ class Token(BaseModel):
 class Chat_group(BaseModel):
     group_name = CharField(unique=False)
     member = ForeignKeyField(User, on_delete='CASCADE')
+class App_server(BaseModel):
+    user = ForeignKeyField(User, on_delete='CASCADE')
+    server_ip = CharField(unique=False)
+
 
 
 if __name__ == '__main__':

@@ -47,6 +47,9 @@ class Client(object):
                     print(e, file=sys.stderr)
     def __assign_server(self):
         ec2 = boto3.resource('ec2',region_name='us-east-2')
+        running_instances = ec2.instances.filter(Filters=[{
+            'Name': 'instance-state-name',
+            'Values': ['running']}])
         for instance in running_instances:
             print(instance.public_ip_address)
     def __show_result(self, resp, cmd=None):
