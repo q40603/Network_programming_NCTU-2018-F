@@ -3,6 +3,7 @@ import socket
 import json
 import os
 import stomp
+import boto3
 class MyListener(stomp.ConnectionListener):
     def on_error(self, headers, message):
         print('received an error "%s"' % message)
@@ -34,6 +35,9 @@ class Client(object):
             if cmd != os.linesep:
                 try:
                     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                        task = cmd.split()
+                        #if(task[0] == "login" or task[0] == "logout" or task[0] == "register" or task[0] == "delete"):
+                        self.__assign_server()
                         s.connect((self.ip, self.port))
                         cmd = self.__attach_token(cmd)
                         s.send(cmd.encode())
@@ -41,7 +45,10 @@ class Client(object):
                         self.__show_result(json.loads(resp), cmd)
                 except Exception as e:
                     print(e, file=sys.stderr)
-
+    def __assign_server(self):
+        ec2 = boto3.resource('ec2',region_name='us-east-2')
+        for instance in running_instances:
+            print(instance.public_ip_address)
     def __show_result(self, resp, cmd=None):
         if 'message' in resp:
             print(resp['message'])
