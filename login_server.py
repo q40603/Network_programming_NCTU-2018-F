@@ -500,7 +500,7 @@ class Server(object):
                 conn, addr = self.sock.accept()
                 with conn:
                     cmd = conn.recv(4096).decode()
-                    prtin(cmd)
+                    print(cmd)
                     resp = self.__process_command(cmd)
                     conn.send(resp.encode())
             except Exception as e:
