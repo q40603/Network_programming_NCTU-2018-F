@@ -33,7 +33,6 @@ python3 /home/ubuntu/5/model.py
 python3 /home/ubuntu/5/server.py 0.0.0.0 8080
 '''
 def createInstance():
-    print(user_data)
     instance = ec2.create_instances(
         ImageId="ami-0d914ccd1a3279ef5", 
         InstanceType = "t2.micro",  
@@ -45,8 +44,12 @@ def createInstance():
 
      )
      # return response
+    instance[0].wait_until_running()
     return instance[0].instance_id
 
-print(createInstance())
+server_id = createInstance()
+print(server_id)
 
-
+instance_collection = ec2.instances.filter(InstanceIds=[server_id])
+for i in instance_collection:
+    print (i.public_ip_address)
