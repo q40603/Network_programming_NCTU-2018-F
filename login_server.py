@@ -107,11 +107,11 @@ class DBControl(object):
                     'subscribe': res,
                     'app_server' : check_login.server_ip
                 }                
-            query_server = App_server.get_or_none(App_server.server_ip).group_by(App_server.server_ip).having(fn.Count() < 10)
-            if not query_server:
+            query_server = App_server.select(App_server.server_ip).group_by(App_server.server_ip).having(fn.Count() < 10)
+            if (query_server.size() == 0):
                 query_server = createInstance()
             else:
-                query_server = query_server.server_ip
+                query_server = query_server[0].server_ip
             record = App_server.create(user = t.owner, server_ip = query_server)
             if record:
                 return {
