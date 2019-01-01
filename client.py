@@ -19,6 +19,7 @@ class Client(object):
             else:
                 raise Exception('Port value should between 1~65535')
             self.cookie = {}
+            self.server = {}
             self.conn = stomp.Connection([('18.224.6.54', 61613)])
             self.conn.set_listener('', MyListener())
             self.conn.start()
@@ -37,7 +38,7 @@ class Client(object):
                     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                         task = cmd.split()
                         #if(task[0] == "login" or task[0] == "logout" or task[0] == "register" or task[0] == "delete"):
-                        self.__assign_server()
+                        #self.__assign_server()
                         s.connect((self.ip, self.port))
                         cmd = self.__attach_token(cmd)
                         s.send(cmd.encode())

@@ -10,17 +10,23 @@ connect_to_mq = stomp.Connection([('18.224.6.54', 61613)])
 connect_to_mq.start()
 connect_to_mq.connect('admin', 'admin', wait=True)
 ec2 = boto3.resource('ec2',region_name='us-east-2')
+user_data = '''#!/bin/bash
+python3 /home/ubuntu/5/model.py
+python3 /home/ubuntu/5/server.py 0.0.0.0 8080
+'''
 class DBControl(object):
     def createInstance():
         instance = ec2.create_instances(
-            ImageId="ami-03e8d404eaeec0df3", 
+            ImageId="ami-0d914ccd1a3279ef5", 
             InstanceType = "t2.micro",  
             SecurityGroupIds=['launch-wizard-1'],
             MinCount=1,
             MaxCount=1,
-            KeyName='qq_key'
-        )
-        # return response
+            KeyName='qq_key',
+            UserData=user_data
+
+         )
+         # return response
         return instance[0].instance_id
     def __auth(func):
         def validate_token(self, token=None, *args):
