@@ -29,10 +29,11 @@ for instance in running_instances:
 print(ec2info)
 '''
 user_data = '''#!/bin/bash
-python3 /5/try.py > /5/tmp.txt'''
+python3 /home/ubuntu/5/server.py 0.0.0.0 8080 >> /home/ubuntu/5/console.txt'''
 def createInstance():
+    print(user_data)
     instance = ec2.create_instances(
-        ImageId="ami-03e8d404eaeec0df3", 
+        ImageId="ami-0b26213a04f4d5b6e", 
         InstanceType = "t2.micro",  
         SecurityGroupIds=['launch-wizard-1'],
         MinCount=1,

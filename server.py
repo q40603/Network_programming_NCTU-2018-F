@@ -5,23 +5,11 @@ import json
 import uuid
 import time
 import stomp
-import boto3
+
 connect_to_mq = stomp.Connection([('18.224.6.54', 61613)])
 connect_to_mq.start()
 connect_to_mq.connect('admin', 'admin', wait=True)
-ec2 = boto3.resource('ec2',region_name='us-east-2')
 class DBControl(object):
-    def createInstance():
-        instance = ec2.create_instances(
-            ImageId="ami-03e8d404eaeec0df3", 
-            InstanceType = "t2.micro",  
-            SecurityGroupIds=['launch-wizard-1'],
-            MinCount=1,
-            MaxCount=1,
-            KeyName='qq_key'
-        )
-        # return response
-        return instance[0].instance_id
     def __auth(func):
         def validate_token(self, token=None, *args):
             if token:
@@ -91,26 +79,13 @@ class DBControl(object):
             query = Chat_group.select(Chat_group.group_name).where(Chat_group.member == t.owner)
             res = []
             for group in query:
-                res.append(group.group_name)
-            query_server = App_server.get_or_none(App_server.server_ip).group_by(App_server.server_ip).having(fn.Count() < 10)
-            if not query_server:
-                query_server = createInstance()
-            else:
-                query_server = query_server.server_ip
-            record = App_server.create(user = t.owner, server_ip = query_server)
-            if record:
-                return {
-                    'status': 0,
-                    'token': t.token,
-                    'message': 'Success!',
-                    'subscribe': res,
-                    'app_server' : query_server
-                }
-            else:
-                return {
-                    'status': 1,
-                    'message': 'login assgin server failed due to unknown reason'
-                }                
+                res.append(group.group_name)            
+            return {
+                'status': 0,
+                'token': t.token,
+                'message': 'Success!',
+                'subscribe': res
+            }
         else:
             return {
                 'status': 1,
