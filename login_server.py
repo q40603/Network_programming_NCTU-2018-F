@@ -30,7 +30,7 @@ def createInstance():
     instance[0].wait_until_running()
     instance_collection = ec2.instances.filter(InstanceIds=[instance[0].instance_id])
     for i in instance_collection:
-        return (i.public_ip_address)
+        return (i.public_ip_address, instance[0].instance_id)
 class DBControl(object):
     def __auth(func):
         def validate_token(self, token=None, *args):
@@ -110,13 +110,16 @@ class DBControl(object):
                     'message': 'Success!',
                     'subscribe': res,
                     'app_server' : check_login.server_ip
-                }                
-            query_server = App_server.select(App_server.server_ip).group_by(App_server.server_ip).having(fn.Count(App_server.user) < 10)
+                }
+            instance_id = ""
+            server_ip = ""                
+            query_server = App_server.select(App_server.server_ip, App_server.instance_id).group_by(App_server.server_ip).having(fn.Count(App_server.user) < 10)
             if (len(query_server) == 0):
-                query_server = createInstance()
+                server_ip, instance_id = createInstance()
             else:
-                query_server = query_server[0].server_ip
-            record = App_server.create(user = t.owner, server_ip = query_server)
+                server_ip = query_server[0].server_ip
+                instance_id = query_server[0].instance_id
+            record = App_server.create(user = t.owner, server_ip = query_server, instance_id = instance_id)
             print(query_server)
             if record:
                 return {
@@ -124,7 +127,7 @@ class DBControl(object):
                     'token': t.token,
                     'message': 'Success!',
                     'subscribe': res,
-                    'app_server' : query_server
+                    'app_server' : server_ip
                 }
             else:
                 return {
@@ -149,6 +152,7 @@ class DBControl(object):
         for group in query:
             res.append(group.group_name)  
         token.delete_instance()
+
         change = App_server.get(user=token.owner)
         change.delete_instance()
         return {
