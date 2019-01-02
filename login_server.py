@@ -119,6 +119,8 @@ class DBControl(object):
             else:
                 server_ip = query_server[0].server_ip
                 instance_id = query_server[0].instance_id
+            print(server_ip)
+            print(instance_id)
             record = App_server.create(user = t.owner, server_ip = query_server, instance_id = instance_id)
             print(query_server)
             if record:
@@ -150,9 +152,11 @@ class DBControl(object):
         query = Chat_group.select(Chat_group.group_name).where(Chat_group.member == token.owner)
         res = []
         for group in query:
-            res.append(group.group_name)  
+            res.append(group.group_name) 
+        find_ip = App_server.get_or_none(App_server.user == token.owner) 
         token.delete_instance()
 
+        query_server = App_server.select(App_server.server_ip).where(App_server.server_ip == "3.16.36.28").having(fn.Count(App_server.user) < 2)
         change = App_server.get(user=token.owner)
         change.delete_instance()
         return {

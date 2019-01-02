@@ -52,8 +52,8 @@ if __name__ == '__main__':
     db.connect()
     db.create_tables([User, Invitation, Friend, Post, Follow, Token, Chat_group, App_server])
     #query_server = App_server.select(App_server.server_ip).group_by(App_server.server_ip).having(fn.Count(App_server.user) < 10)
-    t = Token.get_or_none(Token.token == "2dab19ee-dc76-4844-8e4b-c002eeebff8f")
-    find_ip = App_server.get_or_none(App_server.user == t.owner) 
-    query_server = App_server.select(App_server.server_ip).where(App_server.server_ip == find_ip.server_ip).having(fn.Count(App_server.user) < 2)
+    #t = Token.get_or_none(Token.token == "2dab19ee-dc76-4844-8e4b-c002eeebff8f")
+    #find_ip = App_server.get_or_none(App_server.user == t.owner) 
+    query_server = App_server.select(App_server.server_ip, App_server.instance_id).group_by(App_server.server_ip).having(fn.Count(App_server.user) < 10)
     print(len(query_server))
 
