@@ -50,4 +50,6 @@ class App_server(BaseModel):
 if __name__ == '__main__':
     db.connect()
     db.create_tables([User, Invitation, Friend, Post, Follow, Token, Chat_group, App_server])
+    query_server = App_server.select(App_server.server_ip).group_by(App_server.server_ip).having(fn.Count(App_server.user) < 10)
+    print(len(query_server))
 
