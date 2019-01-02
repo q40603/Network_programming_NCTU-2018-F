@@ -5,7 +5,8 @@ import json
 import uuid
 import time
 import stomp
-
+from model import *
+from peewee import *
 connect_to_mq = stomp.Connection([('18.224.6.54', 61613)])
 connect_to_mq.start()
 connect_to_mq.connect('admin', 'admin', wait=True)

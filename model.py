@@ -1,7 +1,7 @@
 from peewee import *
 
 
-db = SqliteDatabase('database.db', pragmas={'foreign_keys': 1})
+db = MySQLDatabase('tkche870302', user='tkche870302', password='Mq870302',host='database.cld8fxrg0zdy.us-east-2.rds.amazonaws.com', port=3306)
 
 
 class BaseModel(Model):
@@ -50,3 +50,4 @@ class App_server(BaseModel):
 if __name__ == '__main__':
     db.connect()
     db.create_tables([User, Invitation, Friend, Post, Follow, Token, Chat_group, App_server])
+
