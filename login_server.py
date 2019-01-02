@@ -121,8 +121,7 @@ class DBControl(object):
                 instance_id = query_server[0].instance_id
             print(server_ip)
             print(instance_id)
-            record = App_server.create(user = t.owner, server_ip = query_server, instance_id = instance_id)
-            print(query_server)
+            record = App_server.create(user = t.owner, server_ip = server_ip, instance_id = instance_id)
             if record:
                 return {
                     'status': 0,
