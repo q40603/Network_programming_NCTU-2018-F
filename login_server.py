@@ -153,9 +153,10 @@ class DBControl(object):
         for group in query:
             res.append(group.group_name) 
         find_ip = App_server.get_or_none(App_server.user == token.owner) 
+        query_server = App_server.select(App_server.server_ip, App_server.instance_id).where(App_server.server_ip == find_ip.server_ip).having(fn.Count(App_server.user) < 2)
+        if (len(query_server) > 0):
+            ec2.instances.filter(InstanceIds=[query_server[0].instance_id]).terminate()
         token.delete_instance()
-
-        query_server = App_server.select(App_server.server_ip).where(App_server.server_ip == "3.16.36.28").having(fn.Count(App_server.user) < 2)
         change = App_server.get(user=token.owner)
         change.delete_instance()
         return {
