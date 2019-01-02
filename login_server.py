@@ -123,8 +123,6 @@ class DBControl(object):
             else:
                 server_ip = query_server[0].server_ip
                 instance_id = query_server[0].instance_id
-            print(server_ip)
-            print(instance_id)
             record = App_server.create(user = t.owner, server_ip = server_ip, instance_id = instance_id)
             if record:
                 return {
