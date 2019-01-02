@@ -18,7 +18,7 @@ python3 /home/ubuntu/5/server.py 0.0.0.0 8080
 '''
 def createInstance():
     instance = ec2.create_instances(
-        ImageId="ami-0d914ccd1a3279ef5", 
+        ImageId="ami-0fc56c198c6695611", 
         InstanceType = "t2.micro",  
         SecurityGroupIds=['launch-wizard-1'],
         MinCount=1,
