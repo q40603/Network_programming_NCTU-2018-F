@@ -1,0 +1,30 @@
+Not login yet
+Success!
+Success!
+Success!
+Success!
+Success!
+Success!
+Success!
+Success!
+Not login yet
+Not login yet
+Not login yet
+Usage: create-group <user> <group>
+Usage: create-group <user> <group>
+Success!
+Success!
+Success!
+Success!
+hw4_g1 already exist
+hw4_g2 already exist
+hw4_g3 already exist
+hw4_g4 already exist
+hw4_g4 already exist
+hw4_g3 already exist
+hw4_g2 already exist
+hw4_g1 already exist
+Bye!
+Bye!
+Bye!
+Bye!

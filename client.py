@@ -37,7 +37,9 @@ class Client(object):
                 try:
                     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                         task = cmd.split()
-                        if((task[0] == "login" or task[0] == "logout" or task[0] == "register" or task[0] == "delete" ) or (task[1] not in self.cookie) or (self.cookie[task[1]] == "")):
+                        if(len(task) == 1):
+                            s.connect((self.ip, self.port))
+                        elif((task[0] == "login" or task[0] == "logout" or task[0] == "register" or task[0] == "delete" ) or (task[1] not in self.cookie) or (self.cookie[task[1]] == "")):
                             s.connect((self.ip, self.port))
                         else :
                             s.connect((self.server[task[1]], 8080))

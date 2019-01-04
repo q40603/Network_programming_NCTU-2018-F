@@ -12,8 +12,6 @@ connect_to_mq = stomp.Connection([('18.224.6.54', 61613)])
 connect_to_mq.start()
 connect_to_mq.connect('admin', 'admin', wait=True)
 ec2 = boto3.resource('ec2',region_name='us-east-2')
-client = boto3.client('ec2')
-waiter = client.get_waiter('instance_status_ok')
 user_data = '''#!/bin/bash
 python3 /home/ubuntu/5/model.py
 python3 /home/ubuntu/5/server.py 0.0.0.0 8080
@@ -30,7 +28,6 @@ def createInstance():
 
     )
     instance[0].wait_until_running()
-    waiter.wait(InstanceIds=[instance[0].instance_id])
     instance_collection = ec2.instances.filter(InstanceIds=[instance[0].instance_id])
     for i in instance_collection:
         return (i.public_ip_address, instance[0].instance_id)

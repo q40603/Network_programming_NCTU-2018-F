@@ -3,6 +3,7 @@ import socket
 import json
 import os
 import stomp
+import boto3
 class MyListener(stomp.ConnectionListener):
     def on_error(self, headers, message):
         print('received an error "%s"' % message)
@@ -18,6 +19,7 @@ class Client(object):
             else:
                 raise Exception('Port value should between 1~65535')
             self.cookie = {}
+            self.server = {}
             self.conn = stomp.Connection([('18.224.6.54', 61613)])
             self.conn.set_listener('', MyListener())
             self.conn.start()
@@ -34,14 +36,27 @@ class Client(object):
             if cmd != os.linesep:
                 try:
                     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-                        s.connect((self.ip, self.port))
+                        task = cmd.split()
+                        if(len(task) == 1):
+                            s.connect((self.ip, self.port))
+                        elif((task[0] == "login" or task[0] == "logout" or task[0] == "register" or task[0] == "delete" ) or (task[1] not in self.cookie) or (self.cookie[task[1]] == "")):
+                            s.connect((self.ip, self.port))
+                        else :
+                            s.connect((self.server[task[1]], 8080))
+                        #self.__assign_server()
                         cmd = self.__attach_token(cmd)
                         s.send(cmd.encode())
                         resp = s.recv(4096).decode()
                         self.__show_result(json.loads(resp), cmd)
                 except Exception as e:
                     print(e, file=sys.stderr)
-
+    def __assign_server(self):
+        ec2 = boto3.resource('ec2',region_name='us-east-2')
+        running_instances = ec2.instances.filter(Filters=[{
+            'Name': 'instance-state-name',
+            'Values': ['running']}])
+        for instance in running_instances:
+            print(instance.public_ip_address)
     def __show_result(self, resp, cmd=None):
         if 'message' in resp:
             print(resp['message'])
@@ -82,7 +97,14 @@ class Client(object):
                 else:
                     self.cookie[command[1]] = resp['token']
                     self.__subscribe_channel(command[1], resp['token'], resp['subscribe'])
+                if command[1] in self.server:
+                    if resp['app_server'] != self.server[command[1]]:
+                        self.server[command[1]] = resp['app_server']
+                else:
+                    self.server[command[1]] = resp['app_server']
             elif resp['status'] == 0 and command[0] == 'logout':
+                self.cookie[command[1]] = ""
+                self.server[command[1]] = ""
                 self.__unsubscribe_channel(resp['user'], command[1], resp['unsubscribe'])
             elif resp['status'] == 0 and command[0] == 'create-group':
                 self.__subscribe_group_during_login(command)

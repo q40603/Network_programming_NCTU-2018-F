@@ -8,6 +8,8 @@ A tool for retrieving basic information from the running EC2 instances.
 
 # Connect to EC2
 ec2 = boto3.resource('ec2',region_name='us-east-2')
+client = boto3.client('ec2')
+waiter = client.get_waiter('instance_status_ok')
 
 # Get information for all running instances
 '''
@@ -45,6 +47,7 @@ def createInstance():
      )
      # return response
     instance[0].wait_until_running()
+    waiter.wait(InstanceIds=[instance[0].instance_id])
     return instance[0].instance_id
 
 server_id = createInstance()

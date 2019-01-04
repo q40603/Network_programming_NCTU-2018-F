@@ -1,0 +1,29 @@
+Success!
+Success!
+Success!
+Success!
+Not login yet
+Not login yet
+Not login yet
+a does not exist
+Usage: join-group <user> <group>
+Already a member of hw4_g1
+Already a member of hw4_g2
+Already a member of hw4_g3
+Already a member of hw4_g4
+Already a member of hw4_g1
+Already a member of hw4_g2
+Already a member of hw4_g3
+Already a member of hw4_g4
+Success!
+Success!
+Success!
+Success!
+Already a member of hw4_g4
+Already a member of hw4_g3
+Already a member of hw4_g2
+Already a member of hw4_g1
+Bye!
+Bye!
+Bye!
+Bye!
